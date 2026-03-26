@@ -1,34 +1,33 @@
 spring:
   application:
-    name: api-gateway
+    name: API-GATEWAY
+
   cloud:
     gateway:
       routes:
-        - id: hotel-service
-          uri: lb://HOTEL-SERVICE
-          predicates:
-            - Path=/hotels/**
 
-        - id: booking-service
-          uri: lb://BOOKING-SERVICE
-          predicates:
-            - Path=/booking/**
-        - id: auth-service
-          uri: lb://auth-service
+        # AUTH SERVICE
+        - id: USER-AUTH-SERVICE
+          uri: lb://USER-AUTH-SERVICE
           predicates:
             - Path=/auth/**
-        - id: search-service
-          uri: lb://search-service
+
+        # HOTEL + BOOKING + REVIEW
+        - id: HOTEL-BOOKING-SERVICE
+          uri: lb://HOTEL-BOOKING-SERVICE
           predicates:
-            - Path=/search/**
-        - id: payment-service
-          uri: lb://payment-service
-          predicates:
-            - Path=/payment/**
-  eureka:
-    client:
-      service-url:
-        defaultZone: http://localhost:8761/eureka/
+            - Path=/hotels/**,/bookings/**,/reviews/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
 server:
   port: 8080
 

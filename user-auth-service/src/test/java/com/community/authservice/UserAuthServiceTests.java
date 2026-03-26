@@ -1,8 +1,6 @@
-package com.community.hotelservice;
+package com.community.authservice;
 
-import com.community.hotelservice.repo.BookingRepository;
-import com.community.hotelservice.repo.HotelRepository;
-import com.community.hotelservice.repo.ReviewRepository;
+import com.community.authservice.repo.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -12,15 +10,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-class HotelServiceApplicationTests {
+class UserAuthServiceTests {
 
-	@MockBean
-	private BookingRepository bookingRepository;
-	@MockBean private HotelRepository hotelRepository; // Required by HotelService
-	@MockBean private ReviewRepository reviewRepository; // Required by ReviewService
+    @MockBean
+    private UserRepository userRepository;
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

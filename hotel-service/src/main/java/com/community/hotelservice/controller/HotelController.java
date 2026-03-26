@@ -1,27 +1,42 @@
 package com.community.hotelservice.controller;
 
+import com.community.hotelservice.entity.Hotel;
 import com.community.hotelservice.service.HotelService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/hotels")
+@RequiredArgsConstructor
 public class HotelController {
 
-    private final HotelService hotelService;
+    private final HotelService service;
 
-    public HotelController(HotelService hotelService) {
-        this.hotelService = hotelService;
+    @PostMapping
+    public ResponseEntity<?> create(@Valid @RequestBody Hotel hotel) {
+        return ResponseEntity.ok(service.create(hotel));
+    }
+
+    @GetMapping("/search")
+    public List<Hotel> search(@RequestParam String location) {
+        return service.searchByLocation(location);
     }
 
     @GetMapping
-    public String getHotels() {
-        return hotelService.getHotels();
+    public Page<Hotel> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+        return service.getAll(PageRequest.of(page, size));
     }
-
-    @GetMapping("/details")
-    public String getHotelDetails(){
-        return "Hotel details with reviews and images";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.ok("Deleted");
     }
 }

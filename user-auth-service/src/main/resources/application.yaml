@@ -1,11 +1,12 @@
+spring:
+  application:
+    name: USER-AUTH-SERVICE
+
 server:
   port: 8081
 
-spring:
-  application:
-    name: HOTEL-SERVICE
   datasource:
-    url: jdbc:postgresql://localhost:5432/hotel_db
+    url: jdbc:postgresql://localhost:5432/auth_db
     username: postgres
     password: postgres
 
@@ -13,6 +14,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  secret: itkedusecretkey123456
 
 eureka:
   client:
