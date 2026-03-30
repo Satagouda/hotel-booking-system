@@ -15,7 +15,7 @@ public class BookingController {
     private final BookingService service;
 
     @PostMapping
-    public ResponseEntity<?> book(@Valid @RequestBody Booking booking) {
+    public ResponseEntity<Booking> book(@Valid @RequestBody Booking booking) {
         return ResponseEntity.ok(service.book(booking));
     }
 

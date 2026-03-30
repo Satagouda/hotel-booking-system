@@ -1,4 +1,4 @@
-package com.community.authservice.contoller;
+package com.community.authservice.controller;
 
 import com.community.authservice.dto.AuthRequest;
 import com.community.authservice.dto.AuthResponse;
@@ -21,7 +21,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest request) {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody AuthRequest request) {
         String token = service.login(request);
         return ResponseEntity.ok(new AuthResponse(token));
     }

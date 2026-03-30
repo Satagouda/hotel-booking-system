@@ -1,4 +1,4 @@
-package com.community.authservice.contoller;
+package com.community.authservice.controller;
 
 import com.community.authservice.repo.UserRepository; // Ensure this is imported
 import org.junit.jupiter.api.Test;
